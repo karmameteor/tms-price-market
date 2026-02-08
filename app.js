@@ -12,7 +12,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const detailMeta = document.getElementById("detailMeta");
   const detailPrice = document.getElementById("detailPrice");
   const buyBtn = document.getElementById("buyBtn");
-  const enhanceToggle = document.getElementById("enhanceToggle");
   const categorySelect = document.getElementById("categorySelect");
 
   const ITEMS = window.ITEMS;
@@ -36,7 +35,7 @@ window.addEventListener("DOMContentLoaded", () => {
         <div class="card" data-name="${item.name}">
           <img src="${item.img}" alt="${item.name}" />
           <h3>${item.name}</h3>
-          <p class="meta">${item.meta ?? "Enhanceable item"}</p>
+          <p class="meta">${item.meta ?? "Item"}</p>
           <div class="price">Current Price: ${priceText}</div>
         </div>
       `;
@@ -45,12 +44,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function filter(){
     const term = search.value.toLowerCase();
-    const onlyEnhanceable = enhanceToggle.checked;
     const selectedCategory = categorySelect.value;
 
     const filtered = ITEMS.filter(i =>
       i.name.toLowerCase().includes(term) &&
-      (!onlyEnhanceable || i.enhanceable) &&
       (selectedCategory === "all" || getCategory(i) === selectedCategory)
     );
 
@@ -61,7 +58,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function reset(){
     search.value="";
-    enhanceToggle.checked = false;
     categorySelect.value = "all";
     detail.classList.add("hidden");
     render(ITEMS);
@@ -73,16 +69,15 @@ window.addEventListener("DOMContentLoaded", () => {
     detailImg.src = item.img;
     detailImg.alt = item.name;
     detailName.textContent = item.name;
-    detailMeta.textContent = item.meta ?? "Enhancement details will appear here.";
+    detailMeta.textContent = item.meta ?? "Item details will appear here.";
     detailPrice.textContent = item.price == null ? "TBC" : `${item.price} chaos scrolls`;
-    buyBtn.href = `${DISCORD_MARKETPLACE_URL}?search=${encodeURIComponent(item.name)}`;
+    buyBtn.href = `${DISCORD_MARKETPLACE_URL}/search?query=${encodeURIComponent(item.name)}`;
     detail.classList.remove("hidden");
     detail.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   search.addEventListener("input", filter);
   resetBtn.addEventListener("click", reset);
-  enhanceToggle.addEventListener("change", filter);
   categorySelect.addEventListener("change", filter);
   backBtn.addEventListener("click", () => detail.classList.add("hidden"));
 

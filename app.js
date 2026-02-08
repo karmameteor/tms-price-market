@@ -71,7 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
     detailName.textContent = item.name;
     detailMeta.textContent = item.meta ?? "Item details will appear here.";
     detailPrice.textContent = item.price == null ? "TBC" : `${item.price} chaos scrolls`;
-    buyBtn.href = `${DISCORD_MARKETPLACE_URL}?query=${encodeURIComponent(item.name)}&type=message`;
+    buyBtn.href = `${DISCORD_MARKETPLACE_URL}/search?query=${encodeURIComponent(item.name)}&type=message&scope=channel`;
     detail.classList.remove("hidden");
     detail.scrollIntoView({ behavior: "smooth", block: "start" });
   }

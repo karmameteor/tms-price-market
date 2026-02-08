@@ -15,24 +15,26 @@
       <h2>Filters</h2>
 
       <input id="search" placeholder="Search item..." />
-      <button id="resetBtn" type="button">Reset</button>
-
-      <div class="debug" id="debug"></div>
+      <button id="resetBtn">Reset</button>
     </aside>
 
     <!-- Main -->
     <main class="main">
+
       <header class="topbar">
-        <img class="logo" src="https://deanmaple97.github.io/tms-lib/images/Common/logo.png" alt="TMS Logo" />
-        <h1>TMS Price Check</h1>
+        <img
+          class="logo"
+          src="https://deanmaple97.github.io/tms-lib/images/Common/logo.png"
+        />
+        <h1>TMS Price Checker</h1>
       </header>
 
       <div id="grid" class="grid"></div>
-    </main>
 
+    </main>
   </div>
 
-  <!-- IMPORTANT: data.js MUST load before app.js -->
+  <!-- IMPORTANT ORDER -->
   <script src="./data.js"></script>
   <script src="./app.js"></script>
 </body>

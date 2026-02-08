@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TMS Market</title>
+  <title>TMS Price Check</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
@@ -11,15 +11,14 @@
   <!-- Left icon rail -->
   <aside class="rail">
     <div class="rail-top">
-      <button class="rail-btn active" title="Marketplace" aria-label="Marketplace">
-        <!-- binoculars -->
-        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M7 2h2l1 6h4l1-6h2l2 7v5a5 5 0 11-10 0V9l-2-7zm-1 9v3a3 3 0 106 0v-3H6zm10 0v3a3 3 0 106 0v-3h-6z"/></svg>
+      <button class="rail-btn active" title="Price Check" aria-label="Price Check">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/></svg>
       </button>
-      <button class="rail-btn" title="Listings" aria-label="Listings">
-        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h10v2H4v-2z"/></svg>
+      <button class="rail-btn" title="Categories" aria-label="Categories">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z"/></svg>
       </button>
-      <button class="rail-btn" title="Saved" aria-label="Saved">
-        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 21l-7-4V5a2 2 0 012-2h10a2 2 0 012 2v12l-7 4z"/></svg>
+      <button class="rail-btn" title="Info" aria-label="Info">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M11 10h2v7h-2v-7zm0-3h2v2h-2V7zm1-5C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 118-8 8.009 8.009 0 01-8 8z"/></svg>
       </button>
     </div>
 
@@ -38,8 +37,8 @@
       <div class="brand">
         <div class="brand-badge">🍁</div>
         <div>
-          <div class="brand-title">TMS Marketplace</div>
-          <div class="brand-sub">Premium price checker • GitHub Pages</div>
+          <div class="brand-title">TMS Price Check</div>
+          <div class="brand-sub">Premium reference board • chaos scroll prices</div>
         </div>
       </div>
 
@@ -48,17 +47,12 @@
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
             <path fill="currentColor" d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
           </svg>
-          <input id="q" placeholder="Search items… e.g. master ring, czak, timeless" />
+          <input id="q" placeholder="Search… e.g. czak, master ring, timeless" />
         </div>
 
         <button id="toggleFilters" class="btn btn-glow">
           <span class="btn-ico">⚙</span>
           Filters
-        </button>
-
-        <button class="btn btn-primary" id="newPostBtn">
-          <span class="btn-ico">＋</span>
-          New Listing
         </button>
       </div>
     </header>
@@ -85,25 +79,14 @@
           </div>
 
           <div class="field">
-            <label>Price range (m)</label>
+            <label>Price range (CS)</label>
             <div class="range">
               <input id="pmin" type="number" min="0" value="0" />
               <span>—</span>
               <input id="pmax" type="number" min="0" value="9999" />
             </div>
             <input id="priceSlider" type="range" min="0" max="9999" value="9999" />
-            <div class="hint">Tip: set max lower to focus on budget items.</div>
-          </div>
-
-          <div class="field">
-            <label>Availability</label>
-            <div class="tog">
-              <span>Available only</span>
-              <label class="switch">
-                <input id="availableOnly" type="checkbox" />
-                <span class="slider"></span>
-              </label>
-            </div>
+            <div class="hint">Tip: set max lower to narrow down cheaper items.</div>
           </div>
 
           <div class="field">
@@ -129,10 +112,9 @@
           <div class="field">
             <label>Sort</label>
             <div class="sortrow">
-              <button class="btn btn-ghost" data-sort="avg">★ Avg</button>
-              <button class="btn btn-ghost" data-sort="low">↓ Low</button>
-              <button class="btn btn-ghost" data-sort="high">↑ High</button>
-              <button class="btn btn-ghost" data-sort="new">🕒 New</button>
+              <button class="btn btn-ghost" data-sort="price">★ Price</button>
+              <button class="btn btn-ghost" data-sort="issued">🧾 Issued</button>
+              <button class="btn btn-ghost" data-sort="name">A–Z</button>
             </div>
           </div>
 
@@ -142,57 +124,26 @@
 
       <!-- Main column -->
       <main class="maincol">
-        <!-- Filter chips row -->
         <div class="chipbar" id="chipbar"></div>
 
-        <!-- Stats row -->
         <div class="stats">
           <div class="stat">
             <div class="stat-k" id="statCount">0</div>
             <div class="stat-l">Results</div>
           </div>
           <div class="stat">
-            <div class="stat-k" id="statAvg">—</div>
-            <div class="stat-l">Median Avg (m)</div>
+            <div class="stat-k" id="statMedian">—</div>
+            <div class="stat-l">Median Price (CS)</div>
           </div>
           <div class="stat">
             <div class="stat-k" id="statHot">—</div>
-            <div class="stat-l">Most traded</div>
+            <div class="stat-l">Most issued</div>
           </div>
         </div>
 
-        <!-- Grid -->
         <section class="grid" id="grid"></section>
       </main>
 
-    </div>
-  </div>
-
-  <!-- Modal (New Listing mock) -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal-card">
-      <div class="modal-head">
-        <div class="modal-title">New Listing</div>
-        <button class="icon" id="closeModal" aria-label="Close">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="field">
-          <label>Title</label>
-          <input id="mTitle" placeholder="S> 17 att Master First Ring s/b 40cs a/w 80cs" />
-        </div>
-        <div class="field">
-          <label>Description</label>
-          <textarea id="mDesc" rows="4" placeholder="Add details... (mockup only)"></textarea>
-        </div>
-        <div class="field">
-          <label>Image URL</label>
-          <input id="mImg" placeholder="https://..." />
-        </div>
-      </div>
-      <div class="modal-foot">
-        <button class="btn btn-ghost" id="cancelModal">Cancel</button>
-        <button class="btn btn-primary" id="saveModal">Save</button>
-      </div>
     </div>
   </div>
 

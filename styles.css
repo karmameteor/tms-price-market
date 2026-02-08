@@ -108,6 +108,7 @@ body{
   width:28px;
   height:28px;
   cursor:pointer;
+  box-shadow:0 12px 20px rgba(89, 84, 255, 0.35);
 }
 
 .content{

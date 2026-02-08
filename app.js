@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const detailMeta = document.getElementById("detailMeta");
   const detailPrice = document.getElementById("detailPrice");
   const buyBtn = document.getElementById("buyBtn");
-  const categorySelect = document.getElementById("categorySelect");
+  const filterOptions = document.querySelectorAll(".filter-option input");
 
   const ITEMS = window.ITEMS;
   const DISCORD_MARKETPLACE_URL = "https://discord.com/channels/1354002181744885914/1450422964658114621";
@@ -44,11 +44,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function filter(){
     const term = search.value.toLowerCase();
-    const selectedCategory = categorySelect.value;
+    const selectedCategories = Array.from(filterOptions)
+      .filter(option => option.checked)
+      .map(option => option.value);
 
     const filtered = ITEMS.filter(i =>
       i.name.toLowerCase().includes(term) &&
-      (selectedCategory === "all" || getCategory(i) === selectedCategory)
+      (selectedCategories.length === 0 || selectedCategories.includes(getCategory(i)))
     );
 
     searchTerm.textContent = term ? term : "all";
@@ -58,7 +60,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function reset(){
     search.value="";
-    categorySelect.value = "all";
+    filterOptions.forEach(option => {
+      option.checked = false;
+    });
     detail.classList.add("hidden");
     render(ITEMS);
     searchTerm.textContent = "all";
@@ -78,7 +82,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   search.addEventListener("input", filter);
   resetBtn.addEventListener("click", reset);
-  categorySelect.addEventListener("change", filter);
+  filterOptions.forEach(option => option.addEventListener("change", filter));
   backBtn.addEventListener("click", () => detail.classList.add("hidden"));
 
   grid.addEventListener("click", (event) => {

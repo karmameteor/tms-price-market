@@ -1,42 +1,52 @@
-const grid = document.getElementById("grid");
-const search = document.getElementById("search");
+window.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("grid");
+  const search = document.getElementById("search");
+  const resetBtn = document.getElementById("resetBtn");
+  const debug = document.getElementById("debug");
 
-function render(items){
+  // Safety checks (so it never silently fails)
+  if (!grid || !search || !resetBtn) {
+    if (debug) debug.innerText = "Error: Missing HTML elements (#grid, #search, #resetBtn).";
+    return;
+  }
 
-  grid.innerHTML = items.map(item => {
+  // IMPORTANT: Use window.ITEMS (because data.js sets window.ITEMS)
+  const ITEMS = window.ITEMS;
 
-    const priceText =
-      item.price == null
-        ? "TBC"
-        : item.price + " chaos scrolls";
+  if (!Array.isArray(ITEMS)) {
+    debug.innerText = "Error: ITEMS not loaded. Check script order: data.js must be ABOVE app.js.";
+    return;
+  }
 
-    return `
-      <div class="card">
-        <img src="${item.img}">
-        <h3>${item.name}</h3>
-        <div class="badge">Issued: ${item.issued}</div>
-        <div class="price">Current Price: ${priceText}</div>
-      </div>
-    `;
+  debug.innerText = `Loaded ${ITEMS.length} items ✅`;
 
-  }).join("");
-}
+  function render(list) {
+    grid.innerHTML = list.map(item => {
+      const priceText = item.price == null ? "TBC" : `${item.price} chaos scrolls`;
 
-function filter(){
-  const term = search.value.toLowerCase();
+      return `
+        <div class="card">
+          <img src="${item.img}" alt="${item.name}" />
+          <h3>${item.name}</h3>
+          <div class="badge">Issued: ${Number(item.issued).toLocaleString()}</div>
+          <div class="price">Current Price: ${priceText}</div>
+        </div>
+      `;
+    }).join("");
+  }
 
-  const filtered = ITEMS.filter(i =>
-    i.name.toLowerCase().includes(term)
-  );
+  function applyFilter() {
+    const term = search.value.trim().toLowerCase();
+    const filtered = ITEMS.filter(i => i.name.toLowerCase().includes(term));
+    render(filtered);
+  }
 
-  render(filtered);
-}
+  search.addEventListener("input", applyFilter);
+  resetBtn.addEventListener("click", () => {
+    search.value = "";
+    render(ITEMS);
+  });
 
-function resetFilters(){
-  search.value="";
+  // Initial render
   render(ITEMS);
-}
-
-search.addEventListener("input", filter);
-
-render(ITEMS);
+});

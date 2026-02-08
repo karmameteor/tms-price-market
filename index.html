@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>marketplace-items</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Top channel bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="dot"></span>
+        <span class="channel">marketplace-items</span>
+      </div>
+      <button class="iconbtn" title="Options" aria-label="Options">
+        <!-- simple "sliders" icon -->
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="currentColor" d="M7 3h2v10H7V3zm8 0h2v6h-2V3zM7 17h2v4H7v-4zm8-2h2v6h-2v-6zM3 13h18v2H3v-2zM3 9h18v2H3V9z"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Search row -->
+    <section class="search-row">
+      <div class="searchbox">
+        <span class="searchicon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path fill="currentColor" d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z"/>
+          </svg>
+        </span>
+        <input id="q" type="text" placeholder="Search marketplace..." autocomplete="off" />
+      </div>
+
+      <button id="newPost" class="primary">
+        <span class="bubble" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path fill="currentColor" d="M4 4h16v10H7l-3 3V4zm4 5h8v2H8V9zm0-3h8v2H8V6z"/>
+          </svg>
+        </span>
+        New Post
+      </button>
+    </section>
+
+    <!-- Result + controls -->
+    <section class="meta-row">
+      <div class="results">
+        <span id="count">0</span> posts with "<span id="term"></span>"
+        <button id="clear" class="linkbtn">Clear</button>
+      </div>
+
+      <div class="controls">
+        <button id="sortBtn" class="ghost">
+          <span class="arrows" aria-hidden="true">⇅</span>
+          Sort &amp; View
+          <span class="caret" aria-hidden="true">▾</span>
+        </button>
+
+        <div id="sortMenu" class="menu" role="menu" aria-hidden="true">
+          <button class="menuitem" data-sort="newest">Newest</button>
+          <button class="menuitem" data-sort="oldest">Oldest</button>
+          <button class="menuitem" data-sort="likes">Most likes</button>
+          <button class="menuitem" data-sort="comments">Most comments</button>
+          <div class="divider"></div>
+          <label class="menucheck">
+            <input id="compact" type="checkbox" />
+            Compact view
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feed -->
+    <main id="feed" class="feed" aria-live="polite"></main>
+
+    <!-- Modal (New Post) -->
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-label="Create new post">
+        <div class="modal-head">
+          <div class="modal-title">New Post</div>
+          <button id="closeModal" class="iconbtn" aria-label="Close">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <label class="lbl">Title</label>
+          <input id="npTitle" class="inp" placeholder='e.g. S&gt; 17 att Master First Ring s/b 40cs' />
+
+          <label class="lbl">Author</label>
+          <input id="npAuthor" class="inp" placeholder="e.g. Karma" />
+
+          <label class="lbl">Body</label>
+          <textarea id="npBody" class="inp ta" rows="4" placeholder="Write details..."></textarea>
+
+          <label class="lbl">Thumbnail URL (optional)</label>
+          <input id="npThumb" class="inp" placeholder="https://..." />
+        </div>
+
+        <div class="modal-foot">
+          <button id="cancelPost" class="ghost">Cancel</button>
+          <button id="publishPost" class="primary">Publish</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

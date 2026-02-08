@@ -2,7 +2,7 @@ window.ITEMS = [
   {
     name:"Chaos Zakum Helmet",
     price:20,
-    img:"https://maplestory.io/api/gms/latest/item/1002357/icon"
+    img:"https://deanmaple97.github.io/tms-lib/images/Character/Cap/01003112.png"
   },
   {
     name:"Master Ring",

@@ -83,6 +83,7 @@ body{
   color:#1f2937;
   box-shadow:0 12px 24px rgba(12, 10, 24, 0.25);
   cursor:pointer;
+  box-shadow:0 12px 20px rgba(89, 84, 255, 0.35);
 }
 
 .select-wrapper::after{

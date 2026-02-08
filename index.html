@@ -4,34 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>TMS Price Checker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-  <div class="layout">
-
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2>Filters</h2>
-
-      <input id="search" placeholder="Search item..." />
-      <button id="resetBtn">Reset</button>
-    </aside>
-
-    <!-- Main -->
-    <main class="main">
-
-      <header class="topbar">
-        <img
-          class="logo"
-          src="https://deanmaple97.github.io/tms-lib/images/Common/logo.png"
-        />
+  <div class="page">
+    <header class="topbar">
+      <img
+        class="logo"
+        src="https://deanmaple97.github.io/tms-lib/images/Common/logo.png"
+        alt="TMS logo"
+      />
+      <div>
         <h1>TMS Price Checker</h1>
-      </header>
+      </div>
+    </header>
 
+    <section class="search-panel">
+      <h2>Please search the item you'd like to check the price on</h2>
+      <div class="search-input">
+        <span class="search-icon">🔍</span>
+        <input id="search" placeholder="Search items" />
+        <button id="resetBtn" type="button" aria-label="Clear search">✕</button>
+      </div>
+      <div class="filter-row">
+        <label class="select-label" for="categorySelect">Category</label>
+        <div class="select-wrapper">
+          <select id="categorySelect">
+            <option value="all">All Categories</option>
+            <option value="Equips">Equips</option>
+            <option value="Items">Items</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-bar">
+      <div class="results-title">
+        <h3>Search results for '<span id="searchTerm">all</span>'</h3>
+        <span id="resultsCount" class="chip">0 results</span>
+      </div>
+    </section>
+
+    <main>
       <div id="grid" class="grid"></div>
-
     </main>
+
+    <section id="detail" class="detail hidden">
+      <button id="backBtn" class="back-btn" type="button">← Prev</button>
+      <div class="detail-card">
+        <div class="detail-image">
+          <img id="detailImg" src="" alt="" />
+        </div>
+        <div class="detail-info">
+          <h2 id="detailName"></h2>
+          <p id="detailMeta" class="detail-meta">Item details will appear here.</p>
+          <div class="detail-price">
+            <span>Current Price</span>
+            <strong id="detailPrice"></strong>
+          </div>
+          <div class="detail-actions">
+            <a
+              id="buyBtn"
+              class="button primary"
+              href="#"
+              target="_blank"
+              rel="noopener"
+            >
+              Buy on Discord
+            </a>
+            <button class="button ghost" type="button">Marketplace</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- IMPORTANT ORDER -->

@@ -1,41 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>TMS Price Check</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
+  <div class="layout">
 
-<div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Filters</h2>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <h2>Filters</h2>
+      <input id="search" placeholder="Search item..." />
+      <button id="resetBtn" type="button">Reset</button>
 
-    <input id="search" placeholder="Search item..." />
+      <div class="debug" id="debug"></div>
+    </aside>
 
-    <button onclick="resetFilters()">Reset</button>
-  </aside>
+    <!-- Main -->
+    <main class="main">
+      <header class="topbar">
+        <img class="logo" src="https://deanmaple97.github.io/tms-lib/images/Common/logo.png" alt="TMS Logo" />
+        <h1>TMS Price Check</h1>
+      </header>
 
-  <!-- Main -->
-  <main class="main">
+      <div id="grid" class="grid"></div>
+    </main>
 
-    <header class="topbar">
-      <img
-        class="logo"
-        src="https://deanmaple97.github.io/tms-lib/images/Common/logo.png"
-      />
-      <h1>TMS Price Check</h1>
-    </header>
+  </div>
 
-    <div id="grid" class="grid"></div>
-
-  </main>
-</div>
-
-<script src="./data.js"></script>
-<script src="./app.js"></script>
+  <!-- IMPORTANT: data.js MUST load before app.js -->
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>

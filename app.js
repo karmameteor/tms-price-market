@@ -135,29 +135,36 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function card(it){
-    const price = normalizePrice(it);
-    const priceText = price === null ? `<span class="tbc">TBC</span>` : `${price} chaos scrolls`;
+  const price = normalizePrice(it);
+  const priceText = price === null
+    ? `<span class="tbc">TBC</span>`
+    : `${price} chaos scrolls`;
 
-    return `
-      <article class="card">
-        <div class="card-top">
-          <div class="thumb"><img src="${it.img}" alt="" /></div>
-          <div class="meta">
-            <div class="name">${it.name}</div>
-            <div class="subline">
-              <span class="badge">${it.type.toUpperCase()}</span>
-              <span class="badge">Issued: ${Number(it.issued).toLocaleString()}</span>
-            </div>
+  return `
+    <article class="mcard">
+      <div class="mcard-frame">
+        <div class="mcard-image">
+          <img src="${it.img}" alt="${it.name}" />
+        </div>
 
-            <div class="priceblock">
-              <div class="k">Current Price</div>
-              <div class="v">${priceText}</div>
+        <div class="mcard-body">
+          <div class="mcard-toprow">
+            <div class="mcard-title">${it.name}</div>
+            <div class="mcard-badges">
+              <span class="mbadge">${it.type.toUpperCase()}</span>
+              <span class="mbadge">Issued: ${Number(it.issued).toLocaleString()}</span>
             </div>
           </div>
+
+          <div class="mcard-price">
+            <div class="mprice-k">Current Price</div>
+            <div class="mprice-v">${priceText}</div>
+          </div>
         </div>
-      </article>
-    `;
-  }
+      </div>
+    </article>
+  `;
+}
 
   function render(){
     const filtered = applyFilters(window.ITEMS);
